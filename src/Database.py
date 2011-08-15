@@ -79,7 +79,7 @@ class Database:
             for row in rows:
                 revisions[row[0]] = row[1]
             return revisions
-    return dict()
+        return dict()
 
     def updRevision(self, sliceName, revisionId, revision):
         cursor.execute("UPDATE moduleSrc SET revisionId = '" + re.escape(revisionId) + "', revision = " + re.escape(revision) + " WHERE modulename = '" + re.escape(sliceName) + "';")

@@ -1,26 +1,54 @@
-# TODO: How do we difference between Programming languages?
-# TODO: What happens with members?
+# TODO: Syntaxanalyze for more programming languages
+# NOTE: We could analyze the filetype to get the language. After that we 
+#       get some regex from a regex module or something similiar.
+
 # TODO: Catalogize whole classes
-# TODO: get Author Tag etc ( and ''' ''' Comments)
-# TODO: Class Tagging and flagging
-#        Flag is a sha 256 sum of the headclass.. if there are
-#        dependencys in the mod it flags every dependent function with the
-#        shasum and an autoinkrement (per dependency group)
-#        Tagging: Maybe we can create an own statement for that for example:
-#slicetag: module, slicer, example Tag, common
-#        This we could place at the bottom of every function
-#        If no tags are listed we ask user for tags
+# Note: Maybe in next release
 
-
-##########################################################################
-# Returns dictionary which contains a list.. Structure:
-# modName                  = Name of function
-# startLine/endLine        = First and last line number of function
-# resultSource             = Source between first an last line
-#
-#    { modName, resList[parameters, startindex, endindex, sourcecode, importListing] }
-##
-class Slicer:
+class Slicer(object):
+    
+    # Scans for the programming language
+    def languageScanner(self, filename):
+        ind0        = filename.find(".")
+        length      = len(filename)
+        filetype    = filename[ind0+1:length]
+        return filetype
+    
+    # Scans for all members
+    # TODO: What happens with members?
+    # Note: Analyze of sourcecode, if a function uses a Member we should insert it in
+    #       an extra databasetable with the relationinformation.
+    def memberScanner(self, sourceCode):
+        pass
+    
+    # Scans for Authortag etc.
+    # TODO: get Author Tag etc ( and ''' ''' Comments)
+    # NOTE: So we have to filter every scriptfile for their standardtags, maybe we could work
+    #       with some Regexmagic
+    def sourceTagScanner(self, sourceCode):
+        pass
+    
+    # Scans for Slicetags
+    # TODO: Class Tagging and flagging
+    #        Flag is a sha 256 sum of the headclass.. if there are
+    #        dependencys in the mod it flags every dependent function with the
+    #        shasum and an autoinkrement (per dependency group)
+    #        Tagging: Maybe we can create an own statement for that for example:
+    #~slicetag: module, slicer, example Tag, common
+    #        This we could place at the bottom of every function
+    #        If no tags are listed we ask user for tags
+    def sliceTagScanner(self, sliceSource):
+        pass
+    
+    ##########################################################################
+    # Returns dictionary which contains a list.. Structure:
+    # modName                  = Name of function
+    # startLine/endLine        = First and last line number of function
+    # resultSource             = Source between first an last line
+    #
+    #    { modName, resList[parameters, startindex, endindex, sourcecode, importListing] }
+    ##
+    
     def findDefinition(self, sourceCode ):
         # TODO: Filter for mainclass
         # TODO: Filter for comments
